@@ -86,7 +86,7 @@ const router = createRouter({
       beforeEnter: (to) => {
         const id = parseInt(to.params.id as string)
         const eventStore = useOrganizerStore()
-        return OrganizerService.getEvent(id)
+        return OrganizerService.getOrganizer(id)
           .then((response) => {
             // need to setup the data for the event
             eventStore.setEvent(response.data)
