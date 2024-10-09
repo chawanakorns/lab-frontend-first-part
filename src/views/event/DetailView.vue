@@ -7,7 +7,6 @@ const props = defineProps<{
   id: String
 }>()
 const { event } = toRefs(props)
-
 </script>
 <template>
   <p>{{ event.title }} @ {{ event.location }}</p>

@@ -73,13 +73,13 @@ const router = createRouter({
       ]
     },
     {
-      path: '/organizer',
+      path: '/organizers',
       name: 'organizer-list-view',
       component: OrganizerListView,
       props: (route) => ({ page: parseInt(route.query.page?.toString() || '1') })
     },
     {
-      path: '/organizer/:id',
+      path: '/organizers/:id',
       name: 'organizer-layout-view',
       component: OrganizerLayoutView,
       props: true,

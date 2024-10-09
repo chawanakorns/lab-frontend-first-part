@@ -1,31 +1,28 @@
 <script setup lang="ts">
 import Uploader from 'vue-media-upload'
 import { ref } from 'vue'
+
 interface Props {
   modelValue?: string[]
 }
+
 const props = withDefaults(defineProps<Props>(), {
   modelValue: () => []
 })
-const convertStringToMedia = (str: string[]): any => {
-  return str.map((element: string) => {
-    return {
-      name: element
-    }
-  })
-}
+
 const emit = defineEmits(['update:modelValue'])
-const convertMediaToString = (media: any): string[] => {
-  const output: string[] = []
-  media.forEach((element: any) => {
-    output.push(element.name)
-  })
-  return output
-}
-const media = ref(convertStringToMedia(props.modelValue))
+
+const media = ref(props.modelValue.length > 0 ? [{ name: props.modelValue[0] }] : [])
 const uploadUrl = ref(import.meta.env.VITE_UPLOAD_URL)
+
 const onChanged = (files: any) => {
-  emit('update:modelValue', convertMediaToString(files))
+  if (files.length > 0) {
+    media.value = [files[0]];
+    emit('update:modelValue', [files[0].name]);
+  } else {
+    media.value = [];
+    emit('update:modelValue', []);
+  }
 }
 </script>
 
