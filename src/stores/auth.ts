@@ -51,6 +51,23 @@ export const useAuthStore = defineStore('auth', {
 
         isAdmin(): boolean {
             return this.user?.roles.includes('ROLE_ADMIN') || false
-        }
+        },
+
+        register(firstname: string, lastname: string, email: string, password: string) {
+            return apiClient
+            .post('/api/v1/auth/register', {
+                firstname,
+                lastname,
+                email,
+                password
+            })
+            .then((response) => {
+                this.token = response.data.accessToken
+                this.user = response.data.user
+                localStorage.setItem('access_token', this.token as string)
+                localStorage.setItem('user', JSON.stringify(this.user))
+                return response
+            })
+        },
     }
 })
