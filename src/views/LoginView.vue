@@ -21,12 +21,18 @@ const { value: email } = useField<string>('email')
 const { value: password } = useField<string>('password')
 import { useRouter } from 'vue-router'
 const router = useRouter()
+
+import { useMessageStore } from '@/stores/message';
 const onSubmit = handleSubmit((values) => {
+  const messageStore = useMessageStore()
   authStore.login(values.email, values.password)
   .then(() => {
     router.push({ name: 'event-list-view' })
-  }).catch((err) => {
-    console.log('error', err)
+  }).catch(() => {
+    messageStore.updateMessage('could not login')
+    setTimeout(() => {
+      messageStore.resetMessage()
+    }, 3000)
   })
 })
 </script>
