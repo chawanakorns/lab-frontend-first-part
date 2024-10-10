@@ -17,6 +17,7 @@ import OrganizerService from '@/services/OrganizerService'
 import OrganizerDetailView from '@/views/organizer/OrganizerDetailView.vue'
 import AddOrganizerView from '@/views/OrganizerFormView.vue'
 import { useOrganizerStore } from '@/stores/organizer'
+import LoginView from '@/views/LoginView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
