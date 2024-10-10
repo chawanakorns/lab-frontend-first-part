@@ -47,6 +47,10 @@ export const useAuthStore = defineStore('auth', {
         reload(token: string, user: EventOrganizer) {
             this.token = token
             this.user = user
+        },
+
+        isAdmin(): boolean {
+            return this.user?.roles.includes('ROLE_ADMIN') || false
         }
     }
 })
