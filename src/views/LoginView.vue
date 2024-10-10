@@ -19,8 +19,15 @@ const authStore = useAuthStore()
 
 const { value: email } = useField<string>('email')
 const { value: password } = useField<string>('password')
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const onSubmit = handleSubmit((values) => {
   authStore.login(values.email, values.password)
+  .then(() => {
+    router.push({ name: 'event-list-view' })
+  }).catch((err) => {
+    console.log('error', err)
+  })
 })
 </script>
 
