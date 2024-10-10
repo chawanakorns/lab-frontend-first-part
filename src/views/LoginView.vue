@@ -62,7 +62,7 @@ const onSubmit = handleSubmit((values) => {
             </div>
           </div>
           <InputText
-            type="passowrd"
+            type="password"
             v-model="password"
             placeholder="Password"
             :error="errors['password']"
