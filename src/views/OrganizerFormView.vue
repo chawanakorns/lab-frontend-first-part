@@ -18,7 +18,9 @@ function saveOrganizer() {
   OrganizerService.saveOrganizer(organizer.value)
     .then((response) => {
       router.push({ name: 'organizer-detail-view', params: { id: response.data.id } })
-      store.updateMessage('You are successfully add a new organizer for id number ' + response.data.id)
+      store.updateMessage(
+        'You are successfully add a new organizer for id number ' + response.data.id
+      )
       setTimeout(() => {
         store.resetMessage()
       }, 3000)

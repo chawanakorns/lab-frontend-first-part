@@ -132,6 +132,11 @@ const router = createRouter({
       component: AddOrganizerView
     },
     {
+      path: '/login',
+      name: 'login',
+      component: LoginView
+    },
+    {
       path: '/404/:resource',
       name: '404-resource-view',
       component: NotFoundView,

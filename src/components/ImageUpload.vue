@@ -17,11 +17,11 @@ const uploadUrl = ref(import.meta.env.VITE_UPLOAD_URL)
 
 const onChanged = (files: any) => {
   if (files.length > 0) {
-    media.value = [files[0]];
-    emit('update:modelValue', [files[0].name]);
+    media.value = [files[0]]
+    emit('update:modelValue', [files[0].name])
   } else {
-    media.value = [];
-    emit('update:modelValue', []);
+    media.value = []
+    emit('update:modelValue', [])
   }
 }
 </script>
