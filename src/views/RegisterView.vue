@@ -3,9 +3,11 @@ import InputText from '@/components/InputText.vue'
 import * as yup from 'yup'
 import { useField, useForm } from 'vee-validate'
 import { useAuthStore } from '@/stores/auth';
+
 const validationSchema = yup.object({
   firstname: yup.string().required('First name is required'),
   lastname: yup.string().required('Last name is required'),
+  username: yup.string().required('Username is required'),
   email: yup.string().email().required('The email is required'),
   password: yup.string().required('The password is required')
 })
@@ -15,23 +17,27 @@ const { errors, handleSubmit } = useForm({
   initialValues: {
     firstname: '',
     lastname: '',
+    username: '',
     email: '',
     password: ''
   }
 })
+
 const authStore = useAuthStore()
 
 const { value: firstname } = useField<string>('firstname')
 const { value: lastname } = useField<string>('lastname')
+const { value: username } = useField<string>('username')
 const { value: email } = useField<string>('email')
 const { value: password } = useField<string>('password')
+
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
 import { useMessageStore } from '@/stores/message';
 const onSubmit = handleSubmit((values) => {
   const messageStore = useMessageStore()
-  authStore.register(values.firstname, values.lastname, values.email, values.password)
+  authStore.register(values.firstname, values.lastname, values.username, values.email, values.password)
   .then(() => {
     router.push({ name: 'login' })  // Redirect to login after registration
   }).catch(() => {
@@ -73,6 +79,15 @@ const onSubmit = handleSubmit((values) => {
             v-model="lastname"
             placeholder="Last Name"
             :error="errors['lastname']"
+          />
+        </div>
+        <div>
+          <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+          <InputText
+            type="text"
+            v-model="username"
+            placeholder="Username"
+            :error="errors['username']"
           />
         </div>
         <div>

@@ -53,11 +53,12 @@ export const useAuthStore = defineStore('auth', {
             return this.user?.roles.includes('ROLE_ADMIN') || false
         },
 
-        register(firstname: string, lastname: string, email: string, password: string) {
+        register(firstname: string, lastname: string, username: string, email: string, password: string) {
             return apiClient
             .post('/api/v1/auth/register', {
                 firstname,
                 lastname,
+                username,
                 email,
                 password
             })
